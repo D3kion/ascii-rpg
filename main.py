@@ -1,44 +1,40 @@
-import os, platform
-import time
-import colorama
 import sys
 
-# Stores console's window size at launch
-SCREEN_WIDTH = 80
-SCREEN_HEIGHT = 35
+import pygame
+from pygame.locals import *
 
-# Console functions >
-# Configures console's window size according to platform
-def set_console_size():
-    if platform.system() == 'Windows':
-        os.system('title ASCII Combat')
-        os.system(f'mode con: cols={SCREEN_WIDTH} lines={SCREEN_HEIGHT}')
-    elif platform.system() == 'Linux' or platform.system() == 'Darwin':
-        os.system('echo -n -e "\033]0;ASCII Combat\007"')
-        os.system(f'echo "\033[8;{SCREEN_HEIGHT};{SCREEN_WIDTH}t"')
+pygame.init()
 
-# ASCII functions >
-# Clears screen according to platform
-def clear():
-        print(colorama.Style.BRIGHT + colorama.Back.BLACK + colorama.Fore.WHITE, end='')
-        if platform.system() == 'Windows':
-            os.system('cls')
-        elif platform.system() == 'Linux' or platform.system() == 'Darwin':
-            os.system('clear')
+COLS, ROWS = 80, 35
+SIZE = WIDTH, HEIGHT = COLS * 10, ROWS * 15
 
-# Returns an ANSI Sequence to change cursor position
-def pos(x, y):
-    return f'\x1b[{y};{x}H'
+WHITE = 255, 255, 255
+BLACK = 0, 0, 0
 
+SCREEN = pygame.display.set_mode(SIZE, RESIZABLE)
+clock = pygame.time.Clock()
 
-def main():
-    set_console_size()
-    print(pos(5, 15))
-    print('Hello World!')
-    input()
-    # # game = combat.Combat(me, enemies)
-    # # game.cmdloop()
+myFont = pygame.font.SysFont('consolas', 15)
 
-if __name__ == '__main__':
-    main()  
+def rows_cols_test():
+    for i in range(100):
+        label = myFont.render(str(i%10), 1, WHITE)
+        SCREEN.blit(label, (0 + 10*i, 0))
 
+        label = myFont.render(str(i%10), 1, WHITE)
+        SCREEN.blit(label, (0, 0 + 15*i))
+
+with open('./scenes/scene') as f:
+    scene = [line.strip() for line in f.readlines()]
+
+while True:
+    clock.tick(10)
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT: sys.exit()
+
+    SCREEN.fill(BLACK)
+
+    rows_cols_test()
+
+    pygame.display.flip()
