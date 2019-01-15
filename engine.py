@@ -5,9 +5,6 @@ from pygame.locals import *
 
 from scenes import IntroScene, Scene
 
-COLS, ROWS = 80, 35
-SIZE = WIDTH, HEIGHT = COLS * 10, ROWS * 15
-
 
 def get_xy(colrow: tuple):
     return (colrow[0] * 10, colrow[1] * 15)
@@ -16,25 +13,43 @@ def get_xy(colrow: tuple):
 class Engine:
     def __init__(self):
         pygame.init()
+        pygame.display.set_caption('ascii-rpg')
 
-        self.screen = pygame.display.set_mode(SIZE, RESIZABLE)
+        self.screen = pygame.display.set_mode((1024, 768), RESIZABLE)
         self.clock = pygame.time.Clock()
         self.font = pygame.font.SysFont('consolas', 15)
 
-        self.renderer = Renderer(self)
-        self.scene = IntroScene()
+        self.screen_size = pygame.display.get_surface().get_size()
+        self.cols, self.rows = 80, 35
 
-    def start_loop(self):
+        fontsize = self.font.size('a')
+        self.size = self.width, self.height = (
+            self.cols * fontsize[0],
+            self.rows * fontsize[1]
+        )
+
+        self.display = pygame.Surface(self.size)
+
+        # self.renderer = Renderer(self)
+        # self.scene = IntroScene()
+
+    def loop(self):
         while True:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     sys.exit()
 
-            self.screen.fill((0, 0, 0))
+            self.screen.fill((10, 10, 10))
 
-            self.renderer.render_scene(
-                self.scene,
-                ((COLS - 34) // 2, (ROWS - 7) // 2))
+            self.screen.blit(
+                self.display,
+                ((self.screen_size[0] - self.display.get_height) // 2,
+                 (self.screen_size[1] - self.display.get_width) // 2)
+            )
+
+            # self.renderer.render_scene(
+            #     self.scene,
+            #     ((self.cols - 34) // 2, (self.rows - 7) // 2))
 
             pygame.display.flip()
             self.clock.tick(10)
@@ -50,10 +65,10 @@ class Renderer:
         for i in range(len(text)):
             label = self.font.render(text[i], 1, color)
             self.screen.blit(label, get_xy(cursor))
-            cursor = (cursor[0]+1, cursor[1])
+            cursor = (cursor[0] + 1, cursor[1])
 
     def render_scene(self, scene: Scene, cursor: tuple = (0, 0)):
         content = scene.content
         for row in range(len(content)):
             self.render_row(content[row], cursor)
-            cursor = (cursor[0], cursor[1]+1)
+            cursor = (cursor[0], cursor[1] + 1)
