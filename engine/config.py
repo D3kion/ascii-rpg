@@ -1,0 +1,6 @@
+class Config:
+    WINDOW_CAPTION = 'ASCII-RPG'
+    WINDOW_RESOLUTION = (1360, 768)
+
+    DISPLAY_COLS = 80
+    DISPLAY_ROWS = 35
