@@ -1,15 +1,16 @@
-from engine.scene import Scene
+from engine.ui.scene import Scene
 
 from engine.display import Display
 
 
 class TestScene(Scene):
     def loop(self):
-        self._handle_events()
-        self._draw()
-        self.display.render()
-
-        return True
+        self._running = True
+        while self._running:
+            self._handle_events()
+            self._draw()
+            self.display.render()
+            self.clock.tick(10)
 
     def _draw(self):
         self.display.draw((28, 12), '+-------------------+')

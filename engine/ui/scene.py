@@ -2,12 +2,13 @@ import sys
 
 import pygame
 
-from .display import Display
+from engine.display import Display
 
 
 class Scene:
-    def __init__(self):
-        self.display = Display()
+    def __init__(self, display: Display):
+        self.display = display
+        self.clock = display.clock
 
     def loop(self):
         raise NotImplementedError
