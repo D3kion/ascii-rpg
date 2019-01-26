@@ -1,6 +1,5 @@
-from engine.ui.scene import Scene
-
-from engine.display import Display
+from engine import Display
+from engine.ui import Scene
 
 
 class TestScene(Scene):
@@ -13,11 +12,15 @@ class TestScene(Scene):
             self.clock.tick(10)
 
     def _draw(self):
-        self.display.draw((28, 12), '+-------------------+')
-        self.display.draw((28, 13), '|     ASCII-RPG     |')
-        self.display.draw((28, 14), '+-------------------+')
-        self.display.draw((28, 15), '|                   |')
-        self.display.draw((28, 16), '|     > Играть <    |')
-        self.display.draw((28, 17), '|       Выйти       |')
-        self.display.draw((28, 18), '|                   |')
-        self.display.draw((28, 19), '+-------------------+')
+        self.drawer.box((0, 0), (80, 35))
+        self.display.draw((2, 2), 'Hello World!', (127, 0, 0))
+
+    # def _draw(self):
+    #     self.display.draw((28, 12), '+-------------------+')
+    #     self.display.draw((28, 13), '|     ASCII-RPG     |')
+    #     self.display.draw((28, 14), '+-------------------+')
+    #     self.display.draw((28, 15), '|                   |')
+    #     self.display.draw((28, 16), '|     > Играть <    |')
+    #     self.display.draw((28, 17), '|       Выйти       |')
+    #     self.display.draw((28, 18), '|                   |')
+    #     self.display.draw((28, 19), '+-------------------+')

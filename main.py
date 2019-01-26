@@ -1,4 +1,4 @@
-from engine.display import Display
+from engine import Display
 from scenes import TestScene
 
 if __name__ == '__main__':

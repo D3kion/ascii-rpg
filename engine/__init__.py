@@ -1,1 +1,2 @@
-from engine.config import Config
+from .config import Config
+from .display import Display
