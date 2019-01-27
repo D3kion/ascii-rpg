@@ -20,7 +20,7 @@ class Display():
 
         self.font_width, self.font_height = self.font.size('a')
         size = (self.config.DISPLAY_COLS * self.font_width,
-                self.config.DISPLAY_ROWS * self.font_height)
+                self.config.DISPLAY_ROWS * (self.font_height+0.5))
         self._display = pygame.Surface(size)
 
     def _draw_display(self):
@@ -39,7 +39,7 @@ class Display():
         self._display.blit(label, self._get_xy(xy))
 
     def render(self):
-        self.screen.fill((15, 15, 15))
+        self.screen.fill((200, 200, 200))
         self._draw_display()
         pygame.display.flip()
 

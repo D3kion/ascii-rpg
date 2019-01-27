@@ -9,7 +9,7 @@ class Drawer:
         # Draw ┌───┐
         self.display.draw((x, y), extra[2] + extra[0]*(w-2) + extra[3])
         # Draw │   │
-        for i in range(y+1, h-1):
+        for i in range(y+1, h):
             self.display.draw((x, i), extra[1] + ' '*(w-2) + extra[1])
         # Draw └───┘
-        self.display.draw((x, h-1), extra[4] + extra[0]*(w-2) + extra[5])
+        self.display.draw((x, h), extra[4] + extra[0]*(w-2) + extra[5])
