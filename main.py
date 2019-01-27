@@ -1,6 +1,6 @@
 from engine import Display
-from scenes import TestScene
+from scenes import IntroScene
 
 if __name__ == '__main__':
     display = Display()
-    display.set_scene(TestScene)
+    display.set_scene(IntroScene)

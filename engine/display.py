@@ -18,11 +18,6 @@ class Display():
         self.font = pygame.font.SysFont('consolas', 18)
         self.clock = pygame.time.Clock()
 
-        self.font_width, self.font_height = self.font.size('a')
-        size = (self.config.DISPLAY_COLS * self.font_width,
-                self.config.DISPLAY_ROWS * (self.font_height+0.5))
-        self._display = pygame.Surface(size)
-
     def _draw_display(self):
         screen_width, screen_height = pygame.display.get_surface().get_size()
         display_position = (
@@ -39,9 +34,14 @@ class Display():
         self._display.blit(label, self._get_xy(xy))
 
     def render(self):
-        self.screen.fill((200, 200, 200))
+        self.screen.fill((15, 15, 15))
         self._draw_display()
         pygame.display.flip()
 
     def set_scene(self, scene):
+        self.font_width, self.font_height = self.font.size('a')
+        size = (self.config.DISPLAY_COLS * self.font_width,
+                self.config.DISPLAY_ROWS * (self.font_height+0.5))
+        self._display = pygame.Surface(size)
+
         scene(self).loop()
