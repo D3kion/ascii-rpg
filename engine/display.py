@@ -41,7 +41,7 @@ class Display():
     def set_scene(self, scene):
         self.font_width, self.font_height = self.font.size('a')
         size = (self.config.DISPLAY_COLS * self.font_width,
-                self.config.DISPLAY_ROWS * (self.font_height+0.5))
+                self.config.DISPLAY_ROWS * self.font_height)
         self._display = pygame.Surface(size)
 
         scene(self).loop()
