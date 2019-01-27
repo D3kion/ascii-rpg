@@ -21,9 +21,7 @@ class Scene:
             self.clock.tick(10)
 
     def _handle_events(self):
-        for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    sys.exit()
+        raise NotImplementedError
 
     def _draw(self):
         raise NotImplementedError
