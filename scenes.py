@@ -1,4 +1,5 @@
 import sys
+from random import randrange
 import pygame
 
 from engine import Display
@@ -63,12 +64,14 @@ class MenuScene(Scene):
 
     def _draw_pointer(self):
         pos = (
-            (0, 0),
             (32, 16),
             (32, 17),
             (32, 18),
             (32, 19),
         )
 
-        if self.current_choice:
-            self.display.draw(pos[self.current_choice], '>', (0, 63, 0))
+        if not self.current_choice:
+            color = (randrange(0, 255), randrange(0, 255), randrange(0, 255))
+            self.display.draw((35, 13), 'ASCII-RPG', color)
+        else:
+            self.display.draw(pos[self.current_choice-1], '>', (0, 63, 0))
