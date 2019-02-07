@@ -42,12 +42,21 @@ class MenuScene(Scene):
                     self._handle_keys(event)
 
     def _handle_keys(self, event):
-        if event.key == pygame.K_DOWN:
+        if event.key in (pygame.K_DOWN, pygame.K_s):
             if self.current_choice < 4:
                 self.current_choice += 1
-        elif event.key == pygame.K_UP:
+        elif event.key in (pygame.K_UP, pygame.K_w):
             if self.current_choice > 0:
                 self.current_choice -= 1
+        elif event.key in (pygame.K_RETURN, pygame.K_KP_ENTER):
+            if self.current_choice == 1:
+                pass  # play
+            elif self.current_choice == 2:
+                pass  # open game wiki in browser
+            elif self.current_choice == 3:
+                pass  # settings
+            elif self.current_choice == 4:
+                sys.exit()
 
     def _draw(self):
         self.drawer.box((0, 0), (80, 35))
